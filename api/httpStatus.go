@@ -1,12 +1,17 @@
 package api
 
 type Error struct {
-	Message string `json:"message"`
+	Message string `json:"message,omitempty"`
 }
 
 type APIError struct {
-	Status Status `json:"status"`
-	Error  Error  `json:"error"`
+	Status Status `json:"status,omitempty"`
+	Error  Error  `json:"error,omitempty"`
+}
+
+type APISuccess struct {
+	Status Status `json:"status,omitempty"`
+	Data   *any   `json:"data,omitempty"`
 }
 
 func CreateError(code int, message string) APIError {
@@ -21,51 +26,54 @@ func CreateError(code int, message string) APIError {
 	}
 }
 
-func CreateSuccess(code int) Status {
-	return Status{
-		Code: code,
-		Ok:   true,
+func CreateSuccess(code int, data *any) APISuccess {
+	return APISuccess{
+		Status: Status{
+			Code: code,
+			Ok:   true,
+		},
+		Data: data,
 	}
 }
 
-func OK() Status {
-	return CreateSuccess(200)
+func OK(data *any) APISuccess {
+	return CreateSuccess(200, data)
 }
 
-func Created() Status {
-	return CreateSuccess(201)
+func Created(data *any) APISuccess {
+	return CreateSuccess(201, data)
 }
 
-func Accepted() Status {
-	return CreateSuccess(202)
+func Accepted(data *any) APISuccess {
+	return CreateSuccess(202, data)
 }
 
-func NonAuthoritativeInformation() Status {
-	return CreateSuccess(203)
+func NonAuthoritativeInformation(data *any) APISuccess {
+	return CreateSuccess(203, data)
 }
 
-func NoContent() Status {
-	return CreateSuccess(204)
+func NoContent(data *any) APISuccess {
+	return CreateSuccess(204, data)
 }
 
-func ResetContent() Status {
-	return CreateSuccess(205)
+func ResetContent(data *any) APISuccess {
+	return CreateSuccess(205, data)
 }
 
-func PartialContent() Status {
-	return CreateSuccess(206)
+func PartialContent(data *any) APISuccess {
+	return CreateSuccess(206, data)
 }
 
-func MultiStatus() Status {
-	return CreateSuccess(207)
+func MultiStatus(data *any) APISuccess {
+	return CreateSuccess(207, data)
 }
 
-func AlreadyReported() Status {
-	return CreateSuccess(208)
+func AlreadyReported(data *any) APISuccess {
+	return CreateSuccess(208, data)
 }
 
-func IMUsed() Status {
-	return CreateSuccess(226)
+func IMUsed(data *any) APISuccess {
+	return CreateSuccess(226, data)
 }
 
 func BadRequest(message *string) APIError {

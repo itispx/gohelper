@@ -11,7 +11,7 @@ type APIError struct {
 
 type APISuccess struct {
 	Status Status `json:"status,omitempty"`
-	Data   *any   `json:"data,omitempty"`
+	Data   any    `json:"data,omitempty"`
 }
 
 func CreateError(code int, message string) APIError {
@@ -26,7 +26,7 @@ func CreateError(code int, message string) APIError {
 	}
 }
 
-func CreateSuccess(code int, data *any) APISuccess {
+func CreateSuccess(code int, data any) APISuccess {
 	return APISuccess{
 		Status: Status{
 			Code: code,
@@ -36,43 +36,43 @@ func CreateSuccess(code int, data *any) APISuccess {
 	}
 }
 
-func OK(data *any) APISuccess {
+func OK(data any) APISuccess {
 	return CreateSuccess(200, data)
 }
 
-func Created(data *any) APISuccess {
+func Created(data any) APISuccess {
 	return CreateSuccess(201, data)
 }
 
-func Accepted(data *any) APISuccess {
+func Accepted(data any) APISuccess {
 	return CreateSuccess(202, data)
 }
 
-func NonAuthoritativeInformation(data *any) APISuccess {
+func NonAuthoritativeInformation(data any) APISuccess {
 	return CreateSuccess(203, data)
 }
 
-func NoContent(data *any) APISuccess {
+func NoContent(data any) APISuccess {
 	return CreateSuccess(204, data)
 }
 
-func ResetContent(data *any) APISuccess {
+func ResetContent(data any) APISuccess {
 	return CreateSuccess(205, data)
 }
 
-func PartialContent(data *any) APISuccess {
+func PartialContent(data any) APISuccess {
 	return CreateSuccess(206, data)
 }
 
-func MultiStatus(data *any) APISuccess {
+func MultiStatus(data any) APISuccess {
 	return CreateSuccess(207, data)
 }
 
-func AlreadyReported(data *any) APISuccess {
+func AlreadyReported(data any) APISuccess {
 	return CreateSuccess(208, data)
 }
 
-func IMUsed(data *any) APISuccess {
+func IMUsed(data any) APISuccess {
 	return CreateSuccess(226, data)
 }
 
